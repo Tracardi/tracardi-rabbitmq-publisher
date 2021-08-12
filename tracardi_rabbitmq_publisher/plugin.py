@@ -17,10 +17,11 @@ class RabbitPublisherAction(ActionRunner):
         source_config_record = await Entity(id=plugin.source).\
             storage('source').\
             load(SourceRecord)  # type: SourceRecord
-        source_config = source_config_record.decode()
 
-        if source_config is None:
+        if source_config_record is None:
             raise ValueError('Source id {} does not exist.'.format(plugin.source))
+
+        source_config = source_config_record.decode()
 
         plugin.source = RabbitSourceConfiguration(
             **source_config.config

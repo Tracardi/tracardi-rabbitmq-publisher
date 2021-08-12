@@ -9,10 +9,10 @@ async def main():
     plugin = await RabbitPublisherAction.build(
         **{
             "source": {
-                "id": "d0956a79-b885-4e6d-bda5-7f77e614bc2b"
+                "id": "58df3b5c-3109-4750-bb5b-81f5386950b1"
             },
             "queue": {
-                "name": "tracardi2",
+                "name": "tracardi3",
                 "routingKey": "trk",
             }
         }
