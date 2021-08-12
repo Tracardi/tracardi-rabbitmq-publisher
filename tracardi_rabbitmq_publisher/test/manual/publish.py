@@ -1,8 +1,4 @@
 import asyncio
-
-from kombu import Connection, Exchange, Queue, Producer
-
-from tracardi_rabbitmq_publisher.model.queue_config import QueueConfig
 from tracardi_rabbitmq_publisher.plugin import RabbitPublisherAction
 
 async def main():
