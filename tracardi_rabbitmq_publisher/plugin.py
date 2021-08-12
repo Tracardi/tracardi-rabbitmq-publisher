@@ -76,6 +76,12 @@ def register() -> Plugin:
             init={
                 "source": {
                     "id": None
+                },
+                "queue": {
+                    "name": None,
+                    "routingKey": None,
+                    "queue_type": "direct",
+                    "compression": None
                 }
             }
 
