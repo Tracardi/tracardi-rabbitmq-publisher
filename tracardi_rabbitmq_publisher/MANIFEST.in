@@ -1,0 +1,2 @@
+recursive-include tracardi_rabbitmq_publisher/model *
+recursive-include tracardi_rabbitmq_publisher/service *
