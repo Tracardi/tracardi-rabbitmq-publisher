@@ -86,7 +86,7 @@ def register() -> Plugin:
             type='flowNode',
             width=200,
             height=100,
-            icon='queue',
+            icon='rabbitmq',
             group=["Connectors"]
         )
     )
