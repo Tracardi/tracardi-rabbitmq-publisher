@@ -3,7 +3,7 @@ from tracardi_plugin_sdk.domain.register import Plugin, Spec, MetaData
 from tracardi_plugin_sdk.action_runner import ActionRunner
 
 from tracardi.domain.entity import Entity
-from tracardi.domain.source import Source, SourceRecord
+from tracardi.domain.source import SourceRecord
 from tracardi_rabbitmq_publisher.model.queue_config import QueueConfig
 from tracardi_rabbitmq_publisher.model.rabbit_configuration import RabbitSourceConfiguration
 from tracardi_rabbitmq_publisher.service.queue_publisher import QueuePublisher
@@ -70,7 +70,7 @@ def register() -> Plugin:
             className='RabbitPublisherAction',
             inputs=["payload"],
             outputs=[],
-            version='0.1',
+            version='0.1.4',
             license="MIT",
             author="Risto Kowaczewski",
             init={
