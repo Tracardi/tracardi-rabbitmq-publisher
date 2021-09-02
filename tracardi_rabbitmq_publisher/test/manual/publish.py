@@ -1,19 +1,16 @@
-import asyncio
 from tracardi_rabbitmq_publisher.plugin import RabbitPublisherAction
+from tracardi_plugin_sdk.service.plugin_runner import run_plugin
 
-async def main():
-    plugin = await RabbitPublisherAction.build(
-        **{
+init = {
             "source": {
-                "id": "58df3b5c-3109-4750-bb5b-81f5386950b1"
+                "id": "74246646-f25e-4592-aea8-3fc383bc461a"
             },
             "queue": {
-                "name": "tracardi3",
+                "name": "tracardi-1",
                 "routingKey": "trk",
             }
         }
-    )
 
-    await plugin.run({"a": 1})
+payload = {"a": 1}
 
-asyncio.run(main())
+result = run_plugin(RabbitPublisherAction, init, payload)

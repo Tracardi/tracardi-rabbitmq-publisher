@@ -2,8 +2,7 @@ from kombu import Connection
 from tracardi_plugin_sdk.domain.register import Plugin, Spec, MetaData
 from tracardi_plugin_sdk.action_runner import ActionRunner
 
-from tracardi.domain.entity import Entity
-from tracardi.domain.source import SourceRecord
+from tracardi.service.source_reader import read_source
 from tracardi_rabbitmq_publisher.model.queue_config import QueueConfig
 from tracardi_rabbitmq_publisher.model.rabbit_configuration import RabbitSourceConfiguration
 from tracardi_rabbitmq_publisher.service.queue_publisher import QueuePublisher
@@ -14,22 +13,14 @@ class RabbitPublisherAction(ActionRunner):
     @staticmethod
     async def build(**kwargs) -> 'RabbitPublisherAction':
         plugin = RabbitPublisherAction(**kwargs)
-        source_config_record = await Entity(id=plugin.source).\
-            storage('source').\
-            load(SourceRecord)  # type: SourceRecord
-
-        if source_config_record is None:
-            raise ValueError('Source id {} does not exist.'.format(plugin.source))
-
-        source_config = source_config_record.decode()
-
+        source = await read_source(plugin.source)
         plugin.source = RabbitSourceConfiguration(
-            **source_config.config
+            **source.config
         )
 
         return plugin
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         if 'source' not in kwargs:
             raise ValueError('Source not defined.')
 
@@ -70,7 +61,7 @@ def register() -> Plugin:
             className='RabbitPublisherAction',
             inputs=["payload"],
             outputs=[],
-            version='0.1.4',
+            version='0.1.5',
             license="MIT",
             author="Risto Kowaczewski",
             init={

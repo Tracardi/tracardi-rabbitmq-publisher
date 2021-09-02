@@ -5,8 +5,8 @@ with open("tracardi_rabbitmq_publisher/README.md", "r") as fh:
 
 setup(
     name='tracardi-rabbitmq-publisher',
-    version='0.1.4',
-    description='The purpose of this plugin is publish payload to rabbitmq source.',
+    version='0.1.5',
+    description='The purpose of this plugin is publish payload to rabbitmq.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='Risto Kowaczewski',
