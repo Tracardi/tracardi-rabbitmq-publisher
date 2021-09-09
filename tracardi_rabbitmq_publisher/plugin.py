@@ -48,8 +48,7 @@ class RabbitPublisherAction(ActionRunner):
     async def run(self, payload):
         with Connection(self.source.uri, connect_timeout=self.source.timeout) as conn:
             queue_publisher = QueuePublisher(conn, queue_config=self.queue)
-            result = queue_publisher.publish(payload)
-            print(result)
+            queue_publisher.publish(payload)
 
         return None
 
