@@ -25,4 +25,4 @@ class QueuePublisher:
                                  auto_declare=True)
 
     def publish(self, payload):
-        self.producer.publish(payload)  # , compression='bzip2'
+        return self.producer.publish(payload)  # , compression='bzip2'
