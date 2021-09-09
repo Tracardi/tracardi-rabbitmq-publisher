@@ -14,7 +14,7 @@ setup(
     packages=['tracardi_rabbitmq_publisher'],
     install_requires=[
         'tracardi_plugin_sdk',
-        'tracardi',
+        'tracardi>=0.6.10',
         'kombu~=5.1.0',
         'pydantic~=1.8.2',
     ],
