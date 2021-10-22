@@ -1,6 +1,6 @@
 import logging
 from kombu import Exchange, Queue, Producer
-from ..model.queue_config import QueueConfig
+from ..model.configuration import PluginConfiguration
 
 logging.basicConfig(format='%(asctime)s %(message)s')
 logger = logging.getLogger(__name__)
@@ -9,20 +9,21 @@ logger.setLevel(logging.INFO)
 
 class QueuePublisher:
 
-    def __init__(self, conn, queue_config: QueueConfig):
+    def __init__(self, conn, config: PluginConfiguration):
         self.conn = conn
-        self.queue_config = queue_config
+        self.queue_config = config
         channel = conn.channel()
-        exchange = Exchange(queue_config.name, queue_config.queue_type, durable=queue_config.durable)
-        queue = Queue(queue_config.name, exchange=exchange, routing_key=queue_config.routing_key)
+        exchange = Exchange(config.queue.name, config.queue.queue_type, durable=config.queue.durable)
+        queue = Queue(config.queue.name, exchange=exchange, routing_key=config.queue.routing_key)
         queue.maybe_bind(self.conn)
         queue.declare()
 
         self.producer = Producer(exchange=exchange,
                                  channel=channel,
                                  routing_key=queue.routing_key,
-                                 serializer='json',
-                                 auto_declare=True)
+                                 serializer=config.queue.serializer,
+                                 compression=config.queue.compression,
+                                 auto_declare=config.queue.auto_declare)
 
     def publish(self, payload):
         return self.producer.publish(payload)  # , compression='bzip2'

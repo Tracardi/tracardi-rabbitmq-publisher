@@ -5,7 +5,7 @@ with open("tracardi_rabbitmq_publisher/README.md", "r") as fh:
 
 setup(
     name='tracardi-rabbitmq-publisher',
-    version='0.1.5',
+    version='0.6.0',
     description='The purpose of this plugin is publish payload to rabbitmq.',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -13,7 +13,7 @@ setup(
     author_email='risto.kowaczewski@gmail.com',
     packages=['tracardi_rabbitmq_publisher'],
     install_requires=[
-        'tracardi_plugin_sdk',
+        'tracardi_plugin_sdk>=0.6.22',
         'tracardi>=0.6.10',
         'kombu~=5.1.0',
         'pydantic~=1.8.2',
