@@ -1,8 +1,4 @@
-# Tracardi plugin
-
-This code can be run within Tracardi workflow.
-
-# Details
+# RabbitMQ publisher
 
 The purpose of this plugin is to publish payload to RabbitMQ.
 

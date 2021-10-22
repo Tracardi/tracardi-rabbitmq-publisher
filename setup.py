@@ -1,6 +1,6 @@
 from setuptools import setup
 
-with open("tracardi_rabbitmq_publisher/README.md", "r") as fh:
+with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
