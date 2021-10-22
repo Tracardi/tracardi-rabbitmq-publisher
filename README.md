@@ -8,23 +8,28 @@ It reads payload and sends it to defined RabbitMQ. RabbitMq must be defined as s
 
 This node requires configuration.
 
-Example configuration
+*Example configuration*
 
 ```json
 {
   "source": {
-    "id": "58df3b5c-3109-4750-bb5b-81f5386950b1"
+    "name": "RabbitMQ",
+    "id": "79c315aa-2780-4742-bc70-6444bf8ea444"
   },
   "queue": {
-    "name": "tracardi",
-    "routingKey": "trk"
+    "name": "test-test",
+    "routing_key": "test",
+    "queue_type": "direct",
+    "compression": null,
+    "auto_declare": true,
+    "serializer": "json"
   }
 }
 ```
 
 # Input payload
 
-This node reads input payload.
+This node reads input payload and sends it to the queue.
 
 # Output
 

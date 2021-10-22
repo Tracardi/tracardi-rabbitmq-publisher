@@ -48,6 +48,7 @@ def register() -> Plugin:
             version='0.6.0',
             license="MIT",
             author="Risto Kowaczewski",
+            manual="rabbit_publisher_action",
             init={
                 "source": {
                     "id": None
