@@ -64,7 +64,7 @@ def register() -> Plugin:
             },
             form=Form(groups=[
                 FormGroup(
-                    name="Rabbit connection settings",
+                    name="RabbitMQ connection settings",
                     fields=[
                         FormField(
                             id="source",
@@ -79,7 +79,7 @@ def register() -> Plugin:
                 )
                 ,
                 FormGroup(
-                    name="Rabbit queue settings",
+                    name="RabbitMQ queue settings",
                     fields=[
                         FormField(
                             id="queue.name",
@@ -98,7 +98,7 @@ def register() -> Plugin:
                             name="Auto create queue",
                             description="Create queue on first published message.",
                             component=FormComponent(type="bool", props={
-                                "label": "Should rabbitMq create queue if it does not exist."
+                                "label": "Should RabbitMQ create queue if it does not exist."
                             })
                         ),
                         FormField(
@@ -111,14 +111,14 @@ def register() -> Plugin:
                                     "direct": "Direct",
                                     "fanout": "Fanout",
                                     "topic": "Topic",
-                                    "headers": "headers"
+                                    "headers": "Headers"
                                 }
                             })
                         ),
 
                     ]),
                     FormGroup(
-                        name="Rabbit advanced queue settings",
+                        name="RabbitMQ advanced queue settings",
                         fields=[
                             FormField(
                                 id="queue.serializer",
