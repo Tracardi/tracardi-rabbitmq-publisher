@@ -76,8 +76,7 @@ def register() -> Plugin:
                                 props={"label": "resource"})
                         )
                     ]
-                )
-                ,
+                ),
                 FormGroup(
                     name="RabbitMQ queue settings",
                     fields=[
