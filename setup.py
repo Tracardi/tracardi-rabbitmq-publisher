@@ -16,7 +16,7 @@ setup(
         'tracardi_plugin_sdk>=0.6.22',
         'tracardi>=0.6.10',
         'kombu~=5.1.0',
-        'pydantic~=1.8.2',
+        'pydantic',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
