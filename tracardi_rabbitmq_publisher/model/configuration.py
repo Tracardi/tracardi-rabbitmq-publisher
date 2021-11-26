@@ -15,7 +15,7 @@ class QueueConfig(BaseModel):
 
     @validator("name")
     def name_not_empty(cls, value):
-        if value and len(value) == 0:
+        if len(value) == 0:
             raise ValueError("Name can not be empty")
         return value
 
