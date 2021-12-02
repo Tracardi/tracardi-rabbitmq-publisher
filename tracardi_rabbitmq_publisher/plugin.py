@@ -2,6 +2,8 @@ from kombu import Connection
 from tracardi_plugin_sdk.domain.register import Plugin, Spec, MetaData, Form, FormGroup, FormField, FormComponent
 from tracardi_plugin_sdk.action_runner import ActionRunner
 from tracardi.service.storage.driver import storage
+
+from tracardi.domain.resource import ResourceCredentials
 from tracardi_rabbitmq_publisher.model.configuration import PluginConfiguration
 from tracardi_rabbitmq_publisher.model.rabbit_configuration import RabbitSourceConfiguration
 from tracardi_rabbitmq_publisher.service.queue_publisher import QueuePublisher
@@ -16,15 +18,11 @@ class RabbitPublisherAction(ActionRunner):
     @staticmethod
     async def build(**kwargs) -> 'RabbitPublisherAction':
         config = validate(kwargs)
-        source = await storage.driver.resource.load(config.source.id)
-        resource = RabbitSourceConfiguration(
-            **source.config
-        )
+        resource = await storage.driver.resource.load(config.source.id)
+        return RabbitPublisherAction(config, resource.credentials)
 
-        return RabbitPublisherAction(config, resource)
-
-    def __init__(self, config: PluginConfiguration, resource: RabbitSourceConfiguration):
-        self.source = resource
+    def __init__(self, config: PluginConfiguration, credentials: ResourceCredentials):
+        self.source = credentials.get_credentials(self, output=RabbitSourceConfiguration)
         self.config = config
         if self.config.queue.compression == "none":
             self.config.queue.compression = None
@@ -45,7 +43,7 @@ def register() -> Plugin:
             className='RabbitPublisherAction',
             inputs=["payload"],
             outputs=[],
-            version='0.6.0',
+            version='0.6.0.1',
             license="MIT",
             author="Risto Kowaczewski",
             manual="rabbit_publisher_action",
@@ -73,7 +71,7 @@ def register() -> Plugin:
                                         "connect to RabbitMQ server.",
                             component=FormComponent(
                                 type="resource",
-                                props={"label": "resource"})
+                                props={"label": "resource", "tag": "rabbitmq"})
                         )
                     ]
                 ),
